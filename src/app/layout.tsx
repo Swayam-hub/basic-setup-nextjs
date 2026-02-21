@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import Background from "@/components/global/Background";
+import { Header } from "@/components/global/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
 });
 
@@ -23,11 +19,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="dark">
+      <body className={`${inter.className} bg-zinc-950 text-zinc-100`}>
+        <div className="min-h-screen flex flex-col">
+          {/* <Background /> */}
+          <div className="fixed inset-0 -z-10">
+            <div className="absolute inset-0 bg-background" />
+
+            {/* subtle glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(99,102,241,0.12),transparent_40%)]" />
+          </div>
+          <Header />
+          <main className="flex-1">{children}</main>
+          {/* <Footer /> */}
+        </div>
       </body>
     </html>
   );
